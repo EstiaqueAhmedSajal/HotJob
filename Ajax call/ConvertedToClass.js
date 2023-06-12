@@ -1,24 +1,35 @@
 class AjaxRequest {
     constructor() {
-      this.cartIdInput = document.querySelector('input[type="hidden"][name="cart_id"]');
       this.jobIdInput = document.querySelector('input[type="hidden"][name="JOB_ID"]');
+      this.validJob = document.querySelector('input[type="hidden"][name="validJob"]');
     }
   
-    makeRequest(url) {
-      if (this.cartIdInput && this.jobIdInput) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log('AJAX call successful');
+    async makeRequest() {
+      if (this.validJob && this.jobIdInput) {
+        const url = `https://hotjobs.bdjobs.com/Hotjobs-Jobdetails.asp?jid=${this.jobIdInput.value}&jsc=${this.validJob.value}`;
+        alert(url)
+  
+        try {
+          const response = await fetch(url);
+          debugger;
+
+          if (response.ok) {
+            debugger;
+            const data = await response.text();
+            console.log('API call successful');
+            console.log(data);
+          } else {
+            throw new Error('API call failed');
           }
-        };
-        xhr.send();
+        } catch (error) {
+          console.error('Error:', error);
+        }
       } else {
-        console.log('No AJAX call needed');
+        console.log('No API call needed');
       }
     }
   }
+  
   const ajaxRequest = new AjaxRequest();
-  ajaxRequest.makeRequest('https://jsonplaceholder.typicode.com/todos/1');
+  ajaxRequest.makeRequest();
   
