@@ -11,10 +11,10 @@ class AjaxRequest {
   
         try {
           const response = await fetch(url);
-          debugger;
+          
 
           if (response.ok) {
-            debugger;
+            
             const data = await response.text();
             console.log('API call successful');
             console.log(data);
