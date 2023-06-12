@@ -7,12 +7,8 @@ class AjaxRequest {
     async makeRequest() {
       if (this.validJob && this.jobIdInput) {
         const url = `https://hotjobs.bdjobs.com/Hotjobs-Jobdetails.asp?jid=${this.jobIdInput.value}&jsc=${this.validJob.value}`;
-        alert(url)
-  
         try {
           const response = await fetch(url);
-          
-
           if (response.ok) {
             
             const data = await response.text();
